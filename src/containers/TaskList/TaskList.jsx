@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../components/Button/Button";
 
-const TaskList = ({ tasks, message, handleDelete }) => {
+const TaskList = ({ tasks, message, handleDelete, handleDone }) => {
 
 
   return (
@@ -12,6 +12,7 @@ const TaskList = ({ tasks, message, handleDelete }) => {
             <ul>
                 <li>{task}
                     <Button text={"Delete Task"} handleClick={() => handleDelete(index)}/>
+                    <Button text={"Mark as done"} handleClick={() => handleDone(index)}/>
                 </li>
             </ul>
           </div>

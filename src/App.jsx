@@ -27,12 +27,17 @@ const addTask = (newTask) => {
       setTasks(updatedTasks)
     }
 
+    // const handleCompleteTask = (taskToStrike) => {
+      
+    //   setTasks(updatedTasks)
+    // }
+
 
   return (
     <>
      <Nav header={"My Todos"} handleClick={handleClick}/>
      <TaskBox addTask={addTask}/>
-     <TaskList tasks={tasks} handleDelete={handleRemoveTask}/>
+     <TaskList tasks={tasks} handleDelete={handleRemoveTask} handleDone={handleCompleteTask}/>
     </>
   )
 }
