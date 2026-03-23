@@ -17,10 +17,9 @@ const TaskBox = ({addTask}) => {
 
   return (
     <>
-      <p>this is a task box</p>
       <div className="searchbox">
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Enter text here" />
+          <input type="text" placeholder="Enter task here" />
           
         </form>
       </div>

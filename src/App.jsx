@@ -9,12 +9,10 @@ function App() {
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
-    console.log(newTask);
   };
 
   const handleClick = () => {
     setTasks([]);
-    console.log("You cleared all your tasks");
   };
 
   const handleRemoveTask = (taskToRemove) => {
