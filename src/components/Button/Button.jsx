@@ -1,10 +1,6 @@
 import "./Button.css"
 
-const Button = ({text}) => {
-
-    const handleClick = () => {
-       return console.log("This button was clicked");  
-    };
+const Button = ({text, handleClick}) => {
 
   return (
     <div>
