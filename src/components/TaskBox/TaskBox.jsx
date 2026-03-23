@@ -1,5 +1,4 @@
 import "./TaskBox.css";
-import Button from "../Button/Button";
 
 const TaskBox = ({addTask}) => {
 
