@@ -1,7 +1,6 @@
-import React from "react";
 import Button from "../../components/Button/Button";
 
-const TaskList = ({ tasks, message, handleDelete }) => {
+const TaskList = ({ tasks, handleDelete }) => {
 
 
   return (
@@ -16,7 +15,6 @@ const TaskList = ({ tasks, message, handleDelete }) => {
             </ul>
           </div>
         ))}
-        <p>{message}</p>
       </div>
     </>
   );
