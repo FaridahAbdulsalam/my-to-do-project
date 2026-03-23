@@ -1,4 +1,4 @@
-import React from 'react'
+import "./Button.css"
 
 const Button = ({text}) => {
 
@@ -8,7 +8,7 @@ const Button = ({text}) => {
 
   return (
     <div>
-      <button onClick={handleClick}>
+      <button className='button' onClick={handleClick}>
         {text}
       </button>
     </div>
