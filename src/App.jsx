@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import TaskBox from "./components/TaskBox/TaskBox";
@@ -6,6 +6,7 @@ import TaskList from "./containers/TaskList/TaskList";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [message, setMessage] =useState("Nothing to see yet, enter a task to get started!")
 
   const addTask = (newTask) => {
     setTasks([...tasks, { text: newTask, completed: false }]);
@@ -41,6 +42,7 @@ function App() {
     <>
       <Nav header={"My Todos"} handleClick={handleReset} />
       <TaskBox addTask={addTask} />
+      {tasks.length === 0 && <p>{message}</p>}
       <TaskList
         tasks={tasks}
         handleDelete={handleRemoveTask}

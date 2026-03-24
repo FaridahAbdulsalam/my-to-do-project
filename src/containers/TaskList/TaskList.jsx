@@ -1,4 +1,5 @@
-import Button from "../../components/Button/Button";
+
+import ToDoBox from "../../components/To-Do-Box/ToDoBox";
 
 const TaskList = ({ tasks, handleDelete, handleComplete }) => {
 
@@ -8,16 +9,7 @@ const TaskList = ({ tasks, handleDelete, handleComplete }) => {
       <div className="task-list">
         {tasks.length > 0 &&
         tasks.map((task, index) => (
-          <div key={index}>
-            <ul>
-                <li
-                style={{textDecoration: task.completed ? "line-through" : "none"}}>
-                    {task.text}
-                    <Button text={"Delete Task"} handleClick={() => handleDelete(index)}/>
-                    <Button text={task.completed ? "Undo" : "Mark as done"} handleClick={() => handleComplete(index)}/>
-                </li>
-            </ul>
-          </div>
+          <ToDoBox key={index} task={task} index={index} handleComplete={handleComplete} handleDelete={handleDelete}/>
         ))}
       </div>
     </>
