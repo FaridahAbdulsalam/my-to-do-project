@@ -11,7 +11,7 @@ const ToDoBox = ({ task, index, handleComplete, handleDelete }) => {
           onChange={() => handleComplete(index)}
         />
         <p className="toDo-box_text">{task.text}</p>
-        <Button text={"Delete Task"} handleClick={() => handleDelete(index)} />
+        <Button text={"Delete"} handleClick={() => handleDelete(index)} />
       </div>
     </>
   );
