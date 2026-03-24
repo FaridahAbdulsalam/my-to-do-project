@@ -6,11 +6,12 @@ const TaskBox = ({addTask}) => {
     e.preventDefault();
 
     const newTask = e.target[0].value;
-    addTask(newTask);
-
     if(newTask.trim() === ""){
-      alert("Please enter a to-do")
-    };
+      alert("Please enter a to-do");
+      return;
+    } 
+    
+    addTask(newTask);
 
     e.target.reset();
   };
@@ -20,7 +21,6 @@ const TaskBox = ({addTask}) => {
       <div className="searchbox">
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Enter task here" />
-          
         </form>
       </div>
     </>

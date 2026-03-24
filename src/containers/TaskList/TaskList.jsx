@@ -1,19 +1,15 @@
-import Button from "../../components/Button/Button";
 
-const TaskList = ({ tasks, handleDelete }) => {
+import ToDoBox from "../../components/To-Do-Box/ToDoBox";
+
+const TaskList = ({ tasks, handleDelete, handleComplete }) => {
 
 
   return (
     <>
       <div className="task-list">
-        {tasks.map((task, index) => (
-          <div key={index}>
-            <ul>
-                <li>{task}
-                    <Button text={"Delete Task"} handleClick={() => handleDelete(index)}/>
-                </li>
-            </ul>
-          </div>
+        {tasks.length > 0 &&
+        tasks.map((task, index) => (
+          <ToDoBox key={index} task={task} index={index} handleComplete={handleComplete} handleDelete={handleDelete}/>
         ))}
       </div>
     </>

@@ -1,0 +1,10 @@
+.toDo-box{
+    border: 1px pink dotted;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 5px;
+
+}
