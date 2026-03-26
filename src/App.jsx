@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
 import "./App.css";
+
+import { useEffect, useState } from "react";
+
 import Nav from "./components/Nav/Nav";
 import TaskBox from "./components/TaskBox/TaskBox";
 import TaskList from "./containers/TaskList/TaskList";
@@ -7,57 +9,95 @@ import CatPosts from "./components/CatPosts/CatPosts";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [message, setMessage] =useState("Nothing to see yet, enter a task to get started!");
+  const [message, setMessage] = useState(
+    "Nothing to see yet, enter a task to get started!",
+  );
   const [images, setImages] = useState([]);
 
-
-  // const getImages = async() => {
-  //   const url = "https://api.thecatapi.com/v1/images/search";
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   setImages(data)};
-
   const getImages = () => {
-    const url = "https://api.thecatapi.com/v1/images/search"
+    const url = "https://api.thecatapi.com/v1/images/search";
 
-    fetch(url).then((res) => {
-      return res.json()
-    }).then((data) => {
-      setImages(data)
-    })
-  }
-
-   useEffect(() => {getImages();
-   }, []);
-
-  const addTask = (newTask) => {
-    setTasks([...tasks, { text: newTask, completed: false }]);
+    fetch(url)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setImages(data);
+      });
   };
 
-  const handleReset = () => {
-    setTasks([]);
+  const getTasks = async () => {
+    const url = "http://localhost:3000/tasks";
+    const response = await fetch(url);
+    const data = await response.json();
+    setTasks(data.tasks);
   };
 
-  const handleRemoveTask = (taskToRemove) => {
-    const updatedTasks = tasks.filter((task, index) => index !== taskToRemove);
-    setTasks(updatedTasks);
-  };
+  useEffect(() => {
+    getImages();
+    getTasks();
+  }, []);
 
-  const handleComplete = (taskToRemove) => {
-    //index of task to remove
-    const updatedTasks = [];
-
-    for (let i = 0; i < tasks.length; i++) {
-      if (i === taskToRemove) {
-        updatedTasks.push({
-          ...tasks[i],
-          completed: !tasks[i].completed,
-        });
-      } else {
-        updatedTasks.push(tasks[i]);
-      }
+  const addTask = async (newTask) => {
+    const url = "http://localhost:3000/tasks";
+    try {
+      await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          task_title: newTask,
+        }),
+      });
+      getTasks();
+    } catch (error) {
+      console.log("Add failed", error);
     }
-    setTasks(updatedTasks);
+  };
+
+  const handleReset = async () => {
+    const url = "http://localhost:3000/tasks";
+
+    try {
+      const res = await fetch(url, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+      setTasks(data.tasks);
+    } catch (error) {
+      console.log("Delete Failed", error);
+    }
+  };
+
+  const handleRemoveTask = async (taskId) => {
+    const url = "http://localhost:3000/tasks";
+
+    try {
+      const res = await fetch(`${url}/${taskId}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      setTasks(data.tasks);
+    } catch (error) {
+      console.log("Delete Failed", error);
+    }
+  };
+
+  const handleComplete = async (taskId) => {
+    const url = "http://localhost:3000/tasks";
+
+    try {
+      const res = await fetch(`${url}/${taskId}`, {
+        method: "PUT",
+      });
+
+      const data = await res.json();
+      setTasks(data.tasks);
+    } catch (error) {
+      console.log("Toggle failed", error);
+    }
   };
 
   return (
@@ -70,7 +110,7 @@ function App() {
         handleDelete={handleRemoveTask}
         handleComplete={handleComplete}
       />
-      <CatPosts handleClick={getImages} cats={images}/>
+      <CatPosts handleClick={getImages} cats={images} />
     </>
   );
 }
